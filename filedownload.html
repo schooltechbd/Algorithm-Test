@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download the file</title>
+</head>
+<body>
+    <input type="text" class="text" placeholder="Enter number to get file" onblur="download()">
+    <script>
+
+        function download() {
+            var element = document.createElement('a');
+            //if the lext length is small the file downloads but for large text it does not work.
+            let text = getText();
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', "mega.txt");
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+
+        }
+        function getText() {
+            const val = document.querySelector('input').value;
+            let times = val*1024*1024*1024/8;
+            let hex = '00000001';
+            let text = "";
+            for (let i = 1; i <= times; i++) {
+                text = text.concat('', hex);
+            }
+            return text;
+
+        }
+    </script>
+    
+</body>
+</html>
